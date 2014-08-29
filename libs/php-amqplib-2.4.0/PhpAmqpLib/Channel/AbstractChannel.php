@@ -302,17 +302,19 @@ class AbstractChannel
 
         // No deferred methods?  wait for new ones
         while (true) {
+			$this->method_queue[] = array('', '', '');
+			break;
             $frm = $this->next_frame($timeout);
             $frame_type = $frm[0];
             $payload = $frm[1];
 
             if ($frame_type != 1) {
-                throw new AMQPRuntimeException("Expecting AMQP method, received frame type: $frame_type ("
-                    . $PROTOCOL_CONSTANTS_CLASS::$FRAME_TYPES[$frame_type] . ")");
+                /*throw new AMQPRuntimeException("Expecting AMQP method, received frame type: $frame_type ("
+                    . $PROTOCOL_CONSTANTS_CLASS::$FRAME_TYPES[$frame_type] . ")");*/
             }
 
             if (mb_strlen($payload, 'ASCII') < 4) {
-                throw new AMQPOutOfBoundsException("Method frame too short");
+                /*throw new AMQPOutOfBoundsException("Method frame too short");*/
             }
 
             $method_sig_array = unpack("n2", mb_substr($payload, 0, 4, 'ASCII'));

@@ -173,10 +173,10 @@ class AMQPReader
             $res = $this->io->read($n);
             $this->offset += $n;
         } else {
-            if ($this->str_length < $n) {
+           /* if ($this->str_length < $n) {
                 throw new AMQPRuntimeException("Error reading data. Requested $n bytes while string buffer has only " .
                     $this->str_length);
-            }
+            }*/
 
             $res = mb_substr($this->str, 0, $n, 'ASCII');
             $this->str = mb_substr($this->str, $n, mb_strlen($this->str, 'ASCII') - $n, 'ASCII');

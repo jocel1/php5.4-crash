@@ -101,19 +101,19 @@ class StreamIO extends AbstractIO
         $res = '';
         $read = 0;
 
-        while ($read < $n && !feof($this->sock) && (false !== ($buf = fread($this->sock, $n - $read)))) {
+        /*while ($read < $n && !feof($this->sock) && (false !== ($buf = fread($this->sock, $n - $read)))) {
             if ($buf === '') {
                 continue;
             }
 
             $read += mb_strlen($buf, 'ASCII');
             $res .= $buf;
-        }
+        }*/
 
-        if (mb_strlen($res, 'ASCII') != $n) {
+        /*if (mb_strlen($res, 'ASCII') != $n) {
             throw new AMQPRuntimeException("Error reading data. Received " .
                 mb_strlen($res, 'ASCII') . " instead of expected $n bytes");
-        }
+        }*/
 
         return $res;
     }
@@ -122,6 +122,7 @@ class StreamIO extends AbstractIO
 
     public function write($data)
     {
+		return;
         $len = mb_strlen($data, 'ASCII');
         while (true) {
             if (is_null($this->sock)) {

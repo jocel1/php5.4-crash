@@ -15,7 +15,7 @@ class queue {
 
 	private function __construct() {
 		require_once __DIR__.'/libs/php-amqplib-2.4.0/vendor/autoload.php';
-		$this->connection = new AMQPConnection('localhost', '5672', 'guest', 'guest', '/');
+		$this->connection = new AMQPConnection('localhost', '5674', 'guest', 'guest', '/');
 	}
 
 	public function asynchronous_write() {

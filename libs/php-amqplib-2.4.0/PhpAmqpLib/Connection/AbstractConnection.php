@@ -238,7 +238,7 @@ class AbstractConnection extends AbstractChannel
                 $this->setIsConnected(true);
 
                 // Connect the socket
-                $this->getIO()->connect();
+                //$this->getIO()->connect();
 
                 $this->channels = array();
                 // The connection object itself is treated as channel 0
@@ -251,12 +251,6 @@ class AbstractConnection extends AbstractChannel
                 $this->x_start_ok(self::$LIBRARY_PROPERTIES, $this->login_method, $this->login_response, $this->locale);
 
                 $this->wait_tune_ok = true;
-                while ($this->wait_tune_ok) {
-                    $this->wait(array(
-                        $this->waitHelper->get_wait('connection.secure'),
-                        $this->waitHelper->get_wait('connection.tune')
-                    ));
-                }
 
                 $host = $this->x_open($this->vhost, "", $this->insist);
                 if (!$host) {
@@ -577,7 +571,7 @@ class AbstractConnection extends AbstractChannel
         $this->input->setTimeout($currentTimeout);
 
         if ($ch != 0xCE) {
-            throw new AMQPRuntimeException(sprintf("Framing error, unexpected byte: %x", $ch));
+            //throw new AMQPRuntimeException(sprintf("Framing error, unexpected byte: %x", $ch));
         }
 
         return array($frame_type, $channel, $payload);
